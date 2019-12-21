@@ -26,6 +26,7 @@ namespace Api.ServiceB.Controllers
         [HttpGet]
         public string Get()
         {
+            _logger.LogInformation("ServiceB执行");
             return "B";
         }
 

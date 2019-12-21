@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Api.ServiceA.IntegrationEvents.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Toosame.EventBus.Abstractions;
 
 namespace Api.ServiceA.Controllers
 {
@@ -15,17 +13,27 @@ namespace Api.ServiceA.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+        private readonly IEventBus _eventBus;
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IEventBus eventBus)
         {
+            _eventBus = eventBus;
             _logger = logger;
         }
-        
+
         [HttpGet]
         public string Get()
         {
+            var @event = new AChangedEvent()
+            {
+                NewPrice = 100,
+                OldPrice = 99,
+                ProductId = 1
+            };
+            _logger.LogInformation("A发布消息");
+            _eventBus.Publish(@event);
             return "A";
         }
 
