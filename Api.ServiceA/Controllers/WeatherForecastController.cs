@@ -1,7 +1,7 @@
 using Api.ServiceA.IntegrationEvents.Events;
+using Cp.EventBus.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Toosame.EventBus.Abstractions;
 
 namespace Api.ServiceA.Controllers
 {

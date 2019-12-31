@@ -1,4 +1,4 @@
-using Toosame.EventBus.Events;
+using Cp.EventBus.Events;
 
 namespace Api.ServiceA.IntegrationEvents.Events
 {

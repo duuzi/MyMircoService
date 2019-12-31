@@ -1,8 +1,8 @@
 using Api.ServiceB.IntegrationEvents.Events;
+using Cp.EventBus.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using Toosame.EventBus.Abstractions;
 
 namespace Api.ServiceB.IntegrationEvents.EventHandling
 {

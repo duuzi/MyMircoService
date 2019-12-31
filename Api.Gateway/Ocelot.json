@@ -19,7 +19,12 @@
                 "Type": "LeastConnection"
             },
             "ServiceName": "ApiService",
-            "UseServiceDiscovery": true
+            "UseServiceDiscovery": true,
+            //jwt≈‰÷√
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         }
     ],
 
@@ -27,7 +32,7 @@
         "BaseUrl": "http://localhost:5000",
         "ServiceDiscoveryProvider": {
             "Host": "localhost",
-            "Port": 8500,
+            "Port": 8500
             //"Type": "Consul",
             //"PollingInterval": 100
         }

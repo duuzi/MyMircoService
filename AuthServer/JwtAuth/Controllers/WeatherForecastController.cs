@@ -1,11 +1,14 @@
-using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Api.ServiceB.Controllers
+namespace JwtAuth.Controllers
 {
     [ApiController]
-    [Route("apiservice/[controller]")]
+    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -19,24 +22,18 @@ namespace Api.ServiceB.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
+
         [HttpGet]
-        public string Get()
+        public IEnumerable<WeatherForecast> Get()
         {
-            _logger.LogInformation("ServiceB执行");
-            return "B";
-        }
-        [Route("/getNeedAuth")]
-        [HttpGet]
-        public string GetNeedAuth()
-        {
-            _logger.LogInformation("GetNeedAuth");
-            return "GetNeedAuth";
-        }
-        [HttpGet("/health")]
-        public IActionResult Heathle()
-        {
-            return Ok("ok");
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
     }
 }
