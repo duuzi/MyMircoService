@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks\EventBus\Cp.EventBus.RabbitMQ\Cp.EventBus.RabbitMQ.csproj" />
+    <ProjectReference Include="..\BuildingBlocks\Ocelot.JWTAuthorize\Ocelot.JWTAuthorize.csproj" />
   </ItemGroup>
 
 

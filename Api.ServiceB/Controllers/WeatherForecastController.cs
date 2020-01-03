@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Api.ServiceB.Controllers
 {
+    [Authorize("permission")]
     [ApiController]
     [Route("apiservice/[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -19,13 +20,14 @@ namespace Api.ServiceB.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
+
         [HttpGet]
         public string Get()
         {
             _logger.LogInformation("ServiceB执行");
             return "B";
         }
+
         [Route("/getNeedAuth")]
         [HttpGet]
         public string GetNeedAuth()
@@ -33,6 +35,7 @@ namespace Api.ServiceB.Controllers
             _logger.LogInformation("GetNeedAuth");
             return "GetNeedAuth";
         }
+
         [HttpGet("/health")]
         public IActionResult Heathle()
         {
