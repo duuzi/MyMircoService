@@ -10,7 +10,7 @@ using Ocelot.JwtAuthorize;
 
 namespace JwtAuth.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("auth/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -22,13 +22,15 @@ namespace JwtAuth.Controllers
             _tokenBuilder = tokenBuilder;
 
         }
+        [Route("Check")]
+        [HttpGet]
+        public IActionResult Check() => Ok("ok");
+        [Route("Login")]
         [HttpPost]
-        public IActionResult Login([FromBody]LoginModel loginModel)
+        public IActionResult Login([FromForm]LoginModel loginModel)
         {
-
-
             _logger.LogInformation($"{loginModel.UserName} login！");
-            if (loginModel.Password == "111111")
+            if (loginModel.Password == "admin")
             {
                 var ip = HttpContext.Features.Get<Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
                 var claims = new Claim[] {

@@ -35,7 +35,7 @@ namespace Api.ServiceB.Controllers
             _logger.LogInformation("GetNeedAuth");
             return "GetNeedAuth";
         }
-
+        [AllowAnonymous]
         [HttpGet("/health")]
         public IActionResult Heathle()
         {

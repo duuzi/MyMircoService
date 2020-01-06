@@ -1,6 +1,23 @@
 {
     "ReRoutes": [
         {
+            "DownstreamPathTemplate": "/auth/{url}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/auth/{url}",
+            "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 65002
+                }
+            ]
+            //"QoSOptions": {
+            //    "ExceptionsAllowedBeforeBreaking": 3,
+            //    "DurationOfBreak": 10,
+            //    "TimeoutValue": 5000
+            //}
+        },
+        {
             "UpstreamPathTemplate": "/apiservice/{controller}", //上游地址，表示如果配到地址为/apiservice/{controller}格式的请求，就转发到/apiservice/{controller}
             "UpstreamHttpMethod": [ "Get" ],
             "DownstreamPathTemplate": "/apiservice/{controller}",

@@ -1,15 +1,11 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
-using System;
-using System.Text;
 
 namespace Api.Gateway
 {
@@ -50,6 +46,14 @@ namespace Api.Gateway
             //    });
             services.AddOcelotJwtAuthorize(Configuration);
             services.AddOcelot().AddConsul();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("cors", builder =>
+                {
+                    builder.AllowAnyOrigin(); // 允许任何来源的主机访问
+
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +63,10 @@ namespace Api.Gateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("cors");
             //app.UseAuthentication();不需要！！
             app.UseOcelot().Wait();
-            
+            //app.UseCors();
             //app.UseAuthorization();
             //app.UseRouting();
 
