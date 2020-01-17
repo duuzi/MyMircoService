@@ -25,7 +25,6 @@ namespace JwtAuth.Controllers
         [Route("Check")]
         [HttpGet]
         public IActionResult Check() => Ok("ok");
-        [Route("Login")]
         [HttpPost]
         public IActionResult Login([FromForm]LoginModel loginModel)
         {
@@ -39,14 +38,14 @@ namespace JwtAuth.Controllers
                     };
                 switch (loginModel.UserName)
                 {
-                    case "xp"://过期时间为500000
+                    case "admin"://过期时间为500000
                         var token1 = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.UtcNow, DateTime.Now.AddSeconds(500000));
                         _logger.LogInformation($"{loginModel.UserName} login success，and generate token return");
-                        return new JsonResult(new { Result = true, Data = token1 });
+                        return new JsonResult(new { Code = 200, Data = token1.TokenValue });
                     case "ggg"://过期时间为30
                         var token2 = _tokenBuilder.BuildJwtToken(claims, DateTime.Now.AddSeconds(30));
                         _logger.LogInformation($"{loginModel.UserName} login success，and generate token return");
-                        return new JsonResult(new { Result = true, Data = token2 });
+                        return new JsonResult(new { Code = 200, Data = token2 });
                     default:
                         return null;
                 }
@@ -56,7 +55,7 @@ namespace JwtAuth.Controllers
                 _logger.LogInformation($"{loginModel.UserName} login failed");
                 return new JsonResult(new
                 {
-                    Result = false,
+                    Code = 500,
                     Message = "Authentication Failure"
                 });
             }
