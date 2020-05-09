@@ -38,6 +38,7 @@ namespace JwtAuth.Controllers
                     };
                 switch (loginModel.UserName)
                 {
+                    //这里是只要是admin就通过验证，实际要和数据库匹配用户名密码
                     case "admin"://过期时间为500000
                         var token1 = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.UtcNow, DateTime.Now.AddSeconds(500000));
                         _logger.LogInformation($"{loginModel.UserName} login success，and generate token return");

@@ -1,3 +1,4 @@
+using ConsulClientExtension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -44,6 +45,7 @@ namespace Api.Gateway
             //            RequireExpirationTime = true
             //        };
             //    });
+            //services.AddHealthChecks();
             services.AddOcelotJwtAuthorize(Configuration);
             services.AddOcelot().AddConsul();
             services.AddCors(options =>
@@ -63,7 +65,9 @@ namespace Api.Gateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.UseHealthChecks();
             app.UseCors("cors");
+            app.UseCPConsul(Configuration);
             //app.UseAuthentication();不需要！！
             app.UseOcelot().Wait();
             //app.UseCors();

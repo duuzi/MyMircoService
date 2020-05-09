@@ -18,7 +18,7 @@
             //}
         },
         {
-            "UpstreamPathTemplate": "/apiservice/{controller}", //ÉÏÓÎµØÖ·£¬±íÊ¾Èç¹ûÅäµ½µØÖ·Îª/apiservice/{controller}¸ñÊ½µÄÇëÇó£¬¾Í×ª·¢µ½/apiservice/{controller}
+            "UpstreamPathTemplate": "/apiservice/{controller}", //ä¸Šæ¸¸åœ°å€ï¼Œè¡¨ç¤ºå¦‚æœé…åˆ°åœ°å€ä¸º/apiservice/{controller}æ ¼å¼çš„è¯·æ±‚ï¼Œå°±è½¬å‘åˆ°/apiservice/{controller}
             "UpstreamHttpMethod": [ "Get" ],
             "DownstreamPathTemplate": "/apiservice/{controller}",
             "DownstreamScheme": "http",
@@ -37,7 +37,7 @@
             },
             "ServiceName": "ApiService",
             "UseServiceDiscovery": true,
-            //jwtÅäÖÃ
+            //jwté…ç½®
             "AuthenticationOptions": {
                 "AuthenticationProviderKey": "Bearer",
                 "AllowedScopes": []
