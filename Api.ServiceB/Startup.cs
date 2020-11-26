@@ -1,5 +1,6 @@
 using Api.ServiceB.IntegrationEvents.EventHandling;
 using Api.ServiceB.IntegrationEvents.Events;
+using ConsulClientExtension;
 using Cp.EventBus.RabbitMQ;
 using Cp.EventBus.RabbitMQ.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,9 @@ namespace Api.ServiceB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddHealthChecks();
+            //请安装好rabbitMQ后使用
             services.AddEventBus(Configuration.GetSection("RabbitMQ").Get<RabbitMQOption>(),
                             eventHandlers =>
                             {
@@ -114,7 +118,8 @@ namespace Api.ServiceB
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCPConsul(Configuration);
+            app.UseHealthChecks("/api/health/check");
             app.UseHttpsRedirection();
 
             app.UseRouting();

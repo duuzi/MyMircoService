@@ -19,6 +19,7 @@ namespace Api.ServiceA
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
             services.AddEventBus(Configuration.GetSection("RabbitMQ").Get<RabbitMQOption>(),
                             eventHandlers =>
                             {
@@ -36,7 +37,7 @@ namespace Api.ServiceA
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHealthChecks("/api/health/check");
             app.UseHttpsRedirection();
 
             app.UseRouting();

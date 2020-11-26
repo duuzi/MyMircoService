@@ -6,10 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\HealthController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks\ConsulClientExtension\ConsulClientExtension.csproj" />
     <ProjectReference Include="..\BuildingBlocks\EventBus\Cp.EventBus.RabbitMQ\Cp.EventBus.RabbitMQ.csproj" />
     <ProjectReference Include="..\BuildingBlocks\Ocelot.JWTAuthorize\Ocelot.JWTAuthorize.csproj" />
   </ItemGroup>
