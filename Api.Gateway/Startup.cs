@@ -48,6 +48,7 @@ namespace Api.Gateway
             //services.AddHealthChecks();
             services.AddOcelotJwtAuthorize(Configuration);
             services.AddOcelot().AddConsul();
+            services.AddHealthChecks();
             services.AddCors(options =>
             {
                 options.AddPolicy("cors", builder =>
@@ -65,6 +66,7 @@ namespace Api.Gateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHealthChecks("/api/health/check");
             //app.UseHealthChecks();
             app.UseCors("cors");
             app.UseCPConsul(Configuration);
