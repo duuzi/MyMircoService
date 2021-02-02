@@ -1,3 +1,4 @@
+using ConsulClientExtension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ namespace JwtAuth
         {
             services.AddTokenJwtAuthorize(Configuration);
             services.AddControllers();
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,7 +31,8 @@ namespace JwtAuth
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHealthChecks("/api/health/check");
+            app.UseCPConsul(Configuration);
             app.UseHttpsRedirection();
 
             app.UseRouting();

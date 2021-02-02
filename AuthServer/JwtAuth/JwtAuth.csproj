@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\ConsulClientExtension\ConsulClientExtension.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\Ocelot.JWTAuthorize\Ocelot.JWTAuthorize.csproj" />
   </ItemGroup>
 
